@@ -1,0 +1,66 @@
+/* ScrollIndicator Component Styles */
+
+.scroll-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: rgba(30, 41, 59, 0.8);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.scroll-indicator-bar {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 50%,
+    var(--color-accent) 100%
+  );
+  transition: width 0.1s ease-out;
+  transform-origin: left;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+}
+
+/* Add subtle glow effect */
+.scroll-indicator-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  filter: blur(4px);
+}
+
+/* Smooth animation for progress bar */
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-indicator-bar {
+    transition: width 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-indicator-bar {
+    transition: width 0.05s linear;
+  }
+  
+  .scroll-indicator-bar::after {
+    display: none;
+  }
+}
+
+/* Hide on very small screens if needed */
+@media (max-width: 320px) {
+  .scroll-indicator {
+    height: 3px;
+  }
+}
